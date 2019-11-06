@@ -24,7 +24,7 @@ class AnimalClient {
         }
     }
 
-    fun <T> execute(statement: (stub: AnimalServiceGrpc.AnimalServiceBlockingStub) -> T): T {
+    private fun <T> execute(statement: (stub: AnimalServiceGrpc.AnimalServiceBlockingStub) -> T): T {
         val channel: ManagedChannel = ManagedChannelBuilder
                 .forAddress("localhost", 6565)
                 .usePlaintext()
