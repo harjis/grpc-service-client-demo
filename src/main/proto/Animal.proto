@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option java_package = "com.example.grpcservicedemo.grpc";
+
+// The animal service definition.
+service AnimalService {
+    // Retrieve all animals
+    rpc getAnimals(AnimalRequest) returns (AnimalsResponse) {}
+}
+
+message AnimalRequest {
+    string id = 1;
+}
+
+// The response message containing the animals
+message AnimalsResponse {
+    repeated Animal animal = 1;
+}
+
+// The animal
+message Animal {
+    string name = 1;
+    string color = 2;
+    repeated string country = 3;
+}
