@@ -8,10 +8,10 @@ import java.util.concurrent.CompletableFuture
 
 @Service
 class CountryClient {
-    fun all(): List<CountryDTO> {
+    fun show(ids: List<String>): List<CountryDTO> {
         return CompletableFuture.supplyAsync {
             execute { stub ->
-                val request = Country.CountryRequest.newBuilder().build()
+                val request = Country.CountryRequest.newBuilder().addAllId(ids).build()
                 val response = stub.getCountries(request)
                 response.get().countryList.map { CountryDTO(it) }
             }
