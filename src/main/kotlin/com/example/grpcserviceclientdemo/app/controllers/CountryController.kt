@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/countries")
 class CountryController(val countryClient: CountryClient) {
-    @GetMapping("/{ids}")
-    fun show(@PathVariable ids: List<String>) = countryClient.show(ids)
+    @GetMapping("}")
+    fun index() = countryClient.all()
 }

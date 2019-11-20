@@ -9,10 +9,15 @@ service CountryService {
 }
 
 message CountryRequest {
-    repeated string id = 1;
 }
 
 // The response message containing countries
 message CountriesResponse {
-    repeated string country = 1;
+    repeated Country country = 1;
+}
+
+message Country {
+    int64 id = 1;
+    string identifier = 2;
+    string name = 3;
 }

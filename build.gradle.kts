@@ -45,6 +45,7 @@ dependencies {
 	implementation("io.grpc:grpc-netty:1.24.1")
 	implementation("io.grpc:grpc-protobuf:1.24.1")
 	implementation("io.grpc:grpc-stub:1.24.1")
+	testImplementation("io.grpc:grpc-testing:1.24.1")
 }
 
 tasks.withType<Test> {

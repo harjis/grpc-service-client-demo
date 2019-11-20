@@ -1,25 +1,26 @@
 package com.example.grpcserviceclientdemo.app.grpc
 
-import com.example.grpcservicedemo.grpc.Country
+import com.example.grpcservicedemo.grpc.CountryOuterClass
 import com.example.grpcservicedemo.grpc.CountryServiceGrpc
+import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import org.springframework.stereotype.Service
 import java.util.concurrent.CompletableFuture
 
 @Service
-class CountryClient {
-    fun show(ids: List<String>): List<CountryDTO> {
+class CountryClient(private val cchannel: ManagedChannel? = null) {
+    fun all(): List<CountryDTO> {
         return CompletableFuture.supplyAsync {
             execute { stub ->
-                val request = Country.CountryRequest.newBuilder().addAllId(ids).build()
+                val request = CountryOuterClass.CountryRequest.newBuilder().build()
                 val response = stub.getCountries(request)
-                response.get().countryList.map { CountryDTO(it) }
+                response.get().countryList.map { CountryDTO(it.id, it.identifier, it.name) }
             }
         }.get()
     }
 
     private fun <T> execute(statement: (stub: CountryServiceGrpc.CountryServiceFutureStub) -> T): T {
-        val channel = ManagedChannelBuilder
+        val channel = this.cchannel ?: ManagedChannelBuilder
                 .forAddress("localhost", 6565)
                 .usePlaintext()
                 .build()
@@ -37,4 +38,4 @@ class CountryClient {
     }
 }
 
-data class CountryDTO(val country: String)
+data class CountryDTO(val id: Long, val identifier: String, val name: String)
