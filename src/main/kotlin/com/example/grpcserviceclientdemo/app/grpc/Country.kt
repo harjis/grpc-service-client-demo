@@ -7,7 +7,7 @@ import io.grpc.ManagedChannelBuilder
 import org.springframework.stereotype.Service
 
 @Service
-class CountryClient(private val cchannel: ManagedChannel? = null) {
+class Country(private val cchannel: ManagedChannel? = null) {
     fun all(): List<CountryDTO> {
         return execute { stub ->
             val request = CountryOuterClass.CountryRequest.newBuilder().build()

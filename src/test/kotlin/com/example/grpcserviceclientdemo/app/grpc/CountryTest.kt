@@ -15,7 +15,7 @@ import org.mockito.ArgumentCaptor
 import org.mockito.ArgumentMatchers
 import org.mockito.Mockito
 
-class CountryClientTest {
+class CountryTest {
     @get:Rule
     val grpcCleanupRule = GrpcCleanupRule()
 
@@ -45,7 +45,7 @@ class CountryClientTest {
             )
     )
 
-    private var client: CountryClient? = null
+    private var client: Country? = null
 
     @BeforeEach
     fun setup() {
@@ -65,7 +65,7 @@ class CountryClientTest {
                         .build()
         )
 
-        client = CountryClient(channel)
+        client = Country(channel)
     }
 
     @Test
