@@ -71,17 +71,14 @@ class CountryClientTest {
     @Test
     fun doesSomething() {
         val requestCaptor = ArgumentCaptor.forClass(CountryOuterClass.CountryRequest::class.java)
-        client!!.all()
+        val response = client!!.all()
         Mockito
                 .verify(serviceImpl)
                 .getCountries(
                         requestCaptor.capture(),
                         ArgumentMatchers.any<StreamObserver<CountryOuterClass.CountriesResponse>>()
                 )
-
-        println("wat")
-        println(requestCaptor.value)
-        println("wat2")
-//        Assertions.assertEquals("A", requestCaptor.value)
+        Assertions.assertEquals(1, response.size)
+        Assertions.assertEquals("A", response.first().identifier)
     }
 }
