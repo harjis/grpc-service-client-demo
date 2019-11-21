@@ -1,4 +1,4 @@
-package com.example.grpcserviceclientdemo.app.grpc
+package com.example.grpcserviceclientdemo.app.models
 
 import com.example.grpcservicedemo.grpc.CountryOuterClass
 import com.example.grpcservicedemo.grpc.CountryServiceGrpc

@@ -1,6 +1,6 @@
 package com.example.grpcserviceclientdemo.app.controllers
 
-import com.example.grpcserviceclientdemo.app.grpc.AnimalClient
+import com.example.grpcserviceclientdemo.app.models.Animal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/animals")
-class AnimalController(val animalClient: AnimalClient) {
+class AnimalController(val animal: Animal) {
     @GetMapping
-    fun index() = animalClient.all()
+    fun index() = animal.all()
 
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Int) = animalClient.show(id)
+    fun show(@PathVariable id: Int) = animal.show(id)
 }

@@ -1,4 +1,4 @@
-package com.example.grpcserviceclientdemo.app.grpc
+package com.example.grpcserviceclientdemo.app.models
 
 import com.example.grpcservicedemo.grpc.AnimalOuterClass
 import com.example.grpcservicedemo.grpc.AnimalServiceGrpc
@@ -7,7 +7,7 @@ import io.grpc.ManagedChannelBuilder
 import org.springframework.stereotype.Service
 
 @Service
-class AnimalClient {
+class Animal {
     fun all(): List<AnimalDTO> {
         return execute { stub ->
             val request = AnimalOuterClass.AnimalRequest.newBuilder().build()
