@@ -78,4 +78,15 @@ class WorkflowTest {
         Assertions.assertEquals("Folder 1", firstWorkFlow.folder)
         Assertions.assertEquals("Workflow 1", firstWorkFlow.name)
     }
+
+    @Test
+    fun getsWorkflowsAsync(){
+        val response = workflow!!.allAsync()
+        val firstWorkFlow = response.first()
+        Assertions.assertEquals(1, response.size)
+        Assertions.assertEquals(1, firstWorkFlow.id)
+        Assertions.assertEquals(1, firstWorkFlow.viewId)
+        Assertions.assertEquals("Folder 1", firstWorkFlow.folder)
+        Assertions.assertEquals("Workflow 1", firstWorkFlow.name)
+    }
 }
