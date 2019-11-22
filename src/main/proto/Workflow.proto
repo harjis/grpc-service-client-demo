@@ -4,6 +4,7 @@ option java_package = "com.example.grpcservicedemo.grpc";
 
 service WorkflowService {
     rpc getWorkflows (WorkflowsRequest) returns (WorkflowsResponse) {}
+    rpc getWorkflow (WorkflowRequest) returns (WorkflowResponse) {}
 }
 
 message WorkflowsRequest {
@@ -14,8 +15,16 @@ message WorkflowsResponse {
 }
 
 message Workflow {
-    uint64 viewId = 1;
-    string folder = 2;
-    string name = 3;
+    uint64 id = 1;
+    uint64 viewId = 2;
+    string folder = 3;
+    string name = 4;
 }
 
+message WorkflowRequest {
+    int64 id = 1;
+}
+
+message WorkflowResponse {
+    Workflow workflow = 1;
+}

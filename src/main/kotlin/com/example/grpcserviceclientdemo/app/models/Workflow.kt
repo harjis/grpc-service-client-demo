@@ -12,13 +12,19 @@ class Workflow(private val testChannel: ManagedChannel? = null) {
     fun all() = execute { stub ->
         val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
         val response = stub.getWorkflows(request)
-        response.workflowList.map { WorkflowDTO(it.viewId, it.folder, it.name) }
+        response.workflowList.map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
     }
 
     fun allAsync() = executeAsync { stub ->
         val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
         val response = stub.getWorkflows(request)
-        response.get().workflowList.map { WorkflowDTO(it.viewId, it.folder, it.name) }
+        response.get().workflowList.map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
+    }
+
+    fun find(id: Long) = execute { stub ->
+        val request = WorkflowOuterClass.WorkflowRequest.newBuilder().setId(id).build()
+        val response = stub.getWorkflow(request)
+        response.workflow.let { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
     }
 
     private fun <T> execute(statement: (stub: WorkflowServiceGrpc.WorkflowServiceBlockingStub) -> T): T {
@@ -56,4 +62,4 @@ class Workflow(private val testChannel: ManagedChannel? = null) {
     }
 }
 
-data class WorkflowDTO(val viewId: Long, val folder: String, val name: String)
+data class WorkflowDTO(val id: Long, val viewId: Long, val folder: String, val name: String)

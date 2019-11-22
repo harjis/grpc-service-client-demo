@@ -28,6 +28,7 @@ class WorkflowTest {
                                             mutableListOf(
                                                     WorkflowOuterClass.Workflow
                                                             .newBuilder()
+                                                            .setId(1)
                                                             .setViewId(1)
                                                             .setFolder("Folder 1")
                                                             .setName("Workflow 1")
@@ -70,6 +71,11 @@ class WorkflowTest {
     @Test
     fun getsWorkflows() {
         val response = workflow!!.all()
+        val firstWorkFlow = response.first()
         Assertions.assertEquals(1, response.size)
+        Assertions.assertEquals(1, firstWorkFlow.id)
+        Assertions.assertEquals(1, firstWorkFlow.viewId)
+        Assertions.assertEquals("Folder 1", firstWorkFlow.folder)
+        Assertions.assertEquals("Workflow 1", firstWorkFlow.name)
     }
 }
