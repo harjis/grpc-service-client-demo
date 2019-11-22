@@ -3,13 +3,13 @@ syntax = "proto3";
 option java_package = "com.example.grpcservicedemo.grpc";
 
 service WorkflowService {
-    rpc getWorkflows(WorkflowRequest) returns (WorkflowResponse) {}
+    rpc getWorkflows (WorkflowsRequest) returns (WorkflowsResponse) {}
 }
 
-message WorkflowRequest {
+message WorkflowsRequest {
 }
 
-message WorkflowResponse {
+message WorkflowsResponse {
     repeated Workflow workflow = 1;
 }
 

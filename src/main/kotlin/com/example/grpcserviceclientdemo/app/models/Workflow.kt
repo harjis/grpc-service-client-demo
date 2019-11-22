@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service
 @Service
 class Workflow(private val testChannel: ManagedChannel? = null) {
     fun all() = execute { stub ->
-        val request = WorkflowOuterClass.WorkflowRequest.newBuilder().build()
+        val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
         val response = stub.getWorkflows(request)
         response.workflowList.map { WorkflowDTO(it.viewId, it.folder, it.name) }
     }
 
     fun allAsync() = executeAsync { stub ->
-        val request = WorkflowOuterClass.WorkflowRequest.newBuilder().build()
+        val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
         val response = stub.getWorkflows(request)
         response.get().workflowList.map { WorkflowDTO(it.viewId, it.folder, it.name) }
     }
