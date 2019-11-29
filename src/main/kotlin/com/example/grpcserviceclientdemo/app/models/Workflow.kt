@@ -5,6 +5,7 @@ import com.example.grpcservicedemo.grpc.WorkflowServiceGrpc
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import org.springframework.stereotype.Service
+import kotlinx.coroutines.guava.await
 
 // testChannel is needed purely for testing purposes at this stage
 @Service
@@ -21,6 +22,14 @@ class Workflow(private val testChannel: ManagedChannel? = null) {
         val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
         val response = stub.getWorkflows(request)
         response.get().workflowList.map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
+    }
+
+    suspend fun allSuspend(): List<WorkflowDTO> {
+        val channel = ManagedChannelBuilder.forAddress("localhost", 6565).usePlaintext().build()
+        val stub = WorkflowServiceGrpc.newFutureStub(channel)
+        val request = WorkflowOuterClass.WorkflowsRequest.getDefaultInstance()
+        val response = stub.getWorkflows(request).await()
+        return response.workflowList.map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
     }
 
     fun find(id: Long) = execute { channel ->
