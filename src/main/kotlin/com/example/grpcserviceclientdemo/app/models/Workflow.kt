@@ -9,7 +9,7 @@ import kotlinx.coroutines.guava.await
 
 // testChannel is needed purely for testing purposes at this stage
 @Service
-class Workflow(private val testChannel: ManagedChannel? = null) {
+class Workflow(testChannel: ManagedChannel? = null): BaseModel(testChannel) {
     fun all() = execute { channel ->
         val stub = WorkflowServiceGrpc.newBlockingStub(channel)
         val request = WorkflowOuterClass.WorkflowsRequest.newBuilder().build()
@@ -32,28 +32,11 @@ class Workflow(private val testChannel: ManagedChannel? = null) {
         return response.workflowList.map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
     }
 
-    fun find(id: Long) = execute { channel ->
+    fun findById(id: Long) = execute { channel ->
         val stub = WorkflowServiceGrpc.newBlockingStub(channel)
         val request = WorkflowOuterClass.WorkflowRequest.newBuilder().setId(id).build()
         val response = stub.getWorkflow(request)
         response.workflow.let { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
-    }
-
-    private fun <T> execute(statement: (channel: ManagedChannel) -> T): T {
-        val channel = this.testChannel ?: ManagedChannelBuilder
-                .forAddress("localhost", 6565)
-                .usePlaintext()
-                .build()
-
-        return try {
-            statement(channel)
-        } catch (e: Exception) {
-            println("Joq meni pielee")
-            throw e
-        } finally {
-            println("SHUTDOWN")
-            channel.shutdown()
-        }
     }
 }
 

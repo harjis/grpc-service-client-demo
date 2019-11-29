@@ -13,5 +13,5 @@ class AnimalController(val animal: Animal) {
     fun index() = animal.all()
 
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Int) = animal.show(id)
+    fun show(@PathVariable id: Int) = animal.findById(id)
 }

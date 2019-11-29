@@ -23,5 +23,5 @@ class WorkflowController(private val workflow: Workflow) {
     }
 
     @GetMapping("/{id}")
-    fun show(@PathVariable id: Long) = workflow.find(id)
+    fun show(@PathVariable id: Long) = workflow.findById(id)
 }
