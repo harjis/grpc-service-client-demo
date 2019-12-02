@@ -13,15 +13,4 @@ import org.springframework.web.bind.annotation.RestController
 class WorkflowController(private val workflow: Workflow) {
     @GetMapping
     fun index(): List<WorkflowDTO> = workflow.all()
-
-    @GetMapping("/async")
-    fun async(): List<WorkflowDTO> = workflow.allAsync()
-
-    @GetMapping("/suspend")
-    fun suspended(): List<WorkflowDTO> = runBlocking {
-        workflow.allSuspend()
-    }
-
-    @GetMapping("/{id}")
-    fun show(@PathVariable id: Long) = workflow.findById(id)
 }

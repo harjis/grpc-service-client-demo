@@ -44,8 +44,8 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.2")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.3.2")
 
+	implementation("net.devh:grpc-client-spring-boot-starter:2.6.1.RELEASE")
 	implementation("com.google.protobuf:protobuf-java:3.6.1")
-	implementation("io.grpc:grpc-netty:1.24.1")
 	implementation("io.grpc:grpc-protobuf:1.24.1")
 	implementation("io.grpc:grpc-stub:1.24.1")
 	testImplementation("io.grpc:grpc-testing:1.24.1")
