@@ -1,6 +1,5 @@
 package com.example.grpcserviceclientdemo.app.models
 
-import com.example.grpcserviceclientdemo.app.interceptors.AuthorityInterceptor
 import com.example.grpcservicedemo.grpc.WorkflowOuterClass
 import com.example.grpcservicedemo.grpc.WorkflowServiceGrpc
 import net.devh.boot.grpc.client.inject.GrpcClient
@@ -8,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class WorkflowWithStarter {
-    @GrpcClient("my-client", interceptors = [AuthorityInterceptor::class])
+    @GrpcClient("my-client")
     private lateinit var workflowServiceBlockingStub: WorkflowServiceGrpc.WorkflowServiceBlockingStub
 
     fun all(): List<WorkflowDTO> {

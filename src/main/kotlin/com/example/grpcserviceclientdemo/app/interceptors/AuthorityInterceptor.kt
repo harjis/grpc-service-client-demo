@@ -8,7 +8,9 @@ import io.grpc.ForwardingClientCall
 import io.grpc.ForwardingClientCallListener
 import io.grpc.Metadata
 import io.grpc.MethodDescriptor
+import net.devh.boot.grpc.client.interceptor.GrpcGlobalClientInterceptor
 
+@GrpcGlobalClientInterceptor
 class AuthorityInterceptor : ClientInterceptor {
     override fun <ReqT : Any?, RespT : Any?> interceptCall(
             method: MethodDescriptor<ReqT, RespT>,
