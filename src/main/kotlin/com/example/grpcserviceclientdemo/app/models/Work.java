@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class Work<T> extends Base<T> {
+public class Work<T> extends Base {
     public List<WorkflowDTO2> all() {
         return this.execute((ManagedChannel channel) -> {
             WorkflowServiceGrpc.WorkflowServiceBlockingStub stub = WorkflowServiceGrpc.newBlockingStub(channel);
@@ -38,8 +38,8 @@ class WorkflowDTO2 {
     }
 }
 
-abstract class Base<T> {
-    protected T execute(Function<ManagedChannel, T> statement) {
+abstract class Base {
+    protected <T> T execute(Function<ManagedChannel, T> statement) {
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 6565)
                 .usePlaintext()
