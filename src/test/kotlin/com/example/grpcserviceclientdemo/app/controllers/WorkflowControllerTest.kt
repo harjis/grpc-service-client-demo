@@ -7,6 +7,7 @@ import io.grpc.inprocess.InProcessChannelBuilder
 import io.grpc.inprocess.InProcessServerBuilder
 import io.grpc.stub.StreamObserver
 import io.grpc.testing.GrpcCleanupRule
+import io.mockk.mockk
 import org.junit.Rule
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
@@ -75,7 +76,7 @@ class WorkflowControllerTest {
     @Test
     fun respondsToIndexAction() {
         // Snif :< This is not what I want to do
-        val workflowController = WorkflowController(mockedWorkflow)
+        val workflowController = WorkflowController(mockedWorkflow, mockk(), mockk(), mockk())
         val response = workflowController.index()
         Assertions.assertEquals(1, response.size)
     }
