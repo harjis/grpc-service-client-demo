@@ -15,8 +15,12 @@ class WorkflowMigrator(
             val workflows = workflowClient.all()
             val workflows2 = workflowRepository.all()
 
-            println("Workflows grpc: $workflows")
-            println("Workflows db: ${workflows2.map { it.toString() }}")
+            workflows.forEach {
+                println("Saving workflow in DB: $it")
+                workflowRepository.save {
+                    name = it.name
+                }
+            }
         }
     }
 }
