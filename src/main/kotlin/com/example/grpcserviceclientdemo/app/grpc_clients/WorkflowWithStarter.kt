@@ -1,4 +1,4 @@
-package com.example.grpcserviceclientdemo.app.models
+package com.example.grpcserviceclientdemo.app.grpc_clients
 
 import com.example.grpcservicedemo.grpc.WorkflowOuterClass
 import com.example.grpcservicedemo.grpc.WorkflowServiceGrpc

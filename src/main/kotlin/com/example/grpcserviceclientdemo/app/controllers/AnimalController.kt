@@ -1,6 +1,6 @@
 package com.example.grpcserviceclientdemo.app.controllers
 
-import com.example.grpcserviceclientdemo.app.models.Animal
+import com.example.grpcserviceclientdemo.app.grpc_clients.Animal
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping

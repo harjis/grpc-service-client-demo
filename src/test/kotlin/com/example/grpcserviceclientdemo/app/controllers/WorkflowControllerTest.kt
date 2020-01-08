@@ -1,6 +1,6 @@
 package com.example.grpcserviceclientdemo.app.controllers
 
-import com.example.grpcserviceclientdemo.app.models.Workflow
+import com.example.grpcserviceclientdemo.app.grpc_clients.Workflow
 import com.example.grpcservicedemo.grpc.WorkflowOuterClass
 import com.example.grpcservicedemo.grpc.WorkflowServiceGrpc
 import io.grpc.inprocess.InProcessChannelBuilder

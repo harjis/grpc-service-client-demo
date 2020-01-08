@@ -1,4 +1,4 @@
-package com.example.grpcserviceclientdemo.app.models
+package com.example.grpcserviceclientdemo.app.grpc_clients
 
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder

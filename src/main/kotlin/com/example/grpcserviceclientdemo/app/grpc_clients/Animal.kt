@@ -1,9 +1,8 @@
-package com.example.grpcserviceclientdemo.app.models
+package com.example.grpcserviceclientdemo.app.grpc_clients
 
 import com.example.grpcservicedemo.grpc.AnimalOuterClass
 import com.example.grpcservicedemo.grpc.AnimalServiceGrpc
 import io.grpc.ManagedChannel
-import io.grpc.ManagedChannelBuilder
 import org.springframework.stereotype.Service
 
 @Service
