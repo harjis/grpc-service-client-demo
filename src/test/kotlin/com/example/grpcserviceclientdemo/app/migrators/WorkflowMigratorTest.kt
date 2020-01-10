@@ -1,7 +1,8 @@
 package com.example.grpcserviceclientdemo.app.migrators
 
-import com.example.grpcserviceclientdemo.app.grpc_clients.Workflow
+
 import com.example.grpcserviceclientdemo.app.grpc_clients.WorkflowDTO
+import com.example.grpcserviceclientdemo.app.grpc_clients.WorkflowWithStarter
 import com.example.grpcserviceclientdemo.app.repositories.WorkflowRepository
 import io.mockk.every
 import io.mockk.mockk
@@ -17,7 +18,7 @@ import org.springframework.test.context.junit4.SpringRunner
 @SpringBootTest
 class WorkflowMigratorTest {
     private lateinit var workflowMigrator: WorkflowMigrator
-    private lateinit var workflow: Workflow
+    private lateinit var workflow: WorkflowWithStarter
 
     @Autowired
     private lateinit var workflowRepository: WorkflowRepository

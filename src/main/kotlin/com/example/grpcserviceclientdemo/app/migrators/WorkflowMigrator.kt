@@ -1,13 +1,13 @@
 package com.example.grpcserviceclientdemo.app.migrators
 
+import com.example.grpcserviceclientdemo.app.grpc_clients.WorkflowWithStarter
 import com.example.grpcserviceclientdemo.app.repositories.WorkflowRepository
 import org.jetbrains.exposed.sql.transactions.transaction
 import org.springframework.stereotype.Service
-import com.example.grpcserviceclientdemo.app.grpc_clients.Workflow as WorkflowClient
 
 @Service
 class WorkflowMigrator(
-        private val workflowClient: WorkflowClient,
+        private val workflowClient: WorkflowWithStarter,
         private val workflowRepository: WorkflowRepository
 ) {
     fun migrate() {
