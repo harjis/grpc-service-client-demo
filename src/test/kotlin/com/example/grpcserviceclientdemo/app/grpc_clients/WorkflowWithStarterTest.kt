@@ -5,7 +5,9 @@ import com.example.grpcservicedemo.grpc.WorkflowServiceGrpc
 import io.grpc.inprocess.InProcessServerBuilder
 import io.grpc.stub.StreamObserver
 import io.grpc.testing.GrpcCleanupRule
+import net.devh.boot.grpc.client.config.GrpcChannelsProperties
 import org.junit.Rule
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.AdditionalAnswers
@@ -17,6 +19,9 @@ import org.springframework.boot.test.context.SpringBootTest
 class WorkflowWithStarterTest {
     @get:Rule
     val grpcCleanupRule = GrpcCleanupRule()
+
+    @Autowired
+    private lateinit var grpcChannelsProperties: GrpcChannelsProperties
 
     private val serviceImpl = Mockito.mock(
             WorkflowServiceGrpc.WorkflowServiceImplBase::class.java,
@@ -47,9 +52,10 @@ class WorkflowWithStarterTest {
 
     @BeforeEach
     fun setup() {
+
         grpcCleanupRule.register(
                 InProcessServerBuilder
-                        .forName("wat2")
+                        .forName(grpcChannelsProperties.globalChannel.address.schemeSpecificPart)
                         .directExecutor()
                         .addService(serviceImpl)
                         .build()
@@ -62,6 +68,12 @@ class WorkflowWithStarterTest {
 
     @Test
     fun doesSomo() {
-        println(workflowWithStarter.all())
+        val workflows = workflowWithStarter.all()
+        Assertions.assertEquals(1, workflows.size)
+        val workflow = workflows.first()
+        Assertions.assertEquals("Folder 1", workflow.folder)
+        Assertions.assertEquals("Workflow 1", workflow.name)
+        Assertions.assertEquals(1, workflow.id)
+        Assertions.assertEquals(1, workflow.viewId)
     }
 }
