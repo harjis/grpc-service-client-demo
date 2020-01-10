@@ -52,7 +52,6 @@ class WorkflowWithStarterTest {
 
     @BeforeEach
     fun setup() {
-
         grpcCleanupRule.register(
                 InProcessServerBuilder
                         .forName(grpcChannelsProperties.globalChannel.address.schemeSpecificPart)
