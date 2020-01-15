@@ -25,7 +25,7 @@ class WorkflowMigratorTest {
     @BeforeEach
     fun setup() {
         workflow = mockk()
-        every { workflow.all() } returns listOf(WorkflowDTO(1, 1, "Mocked Folder 1,", "Mocked Workflow 1"))
+        every { workflow.all() } returns listOf(WorkflowDTO(1, "Mocked Folder 1,", "Mocked Workflow 1"))
         workflowMigrator = WorkflowMigrator(workflow, workflowRepository)
     }
 

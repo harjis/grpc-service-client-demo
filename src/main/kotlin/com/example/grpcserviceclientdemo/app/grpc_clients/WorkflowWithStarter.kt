@@ -15,8 +15,8 @@ class WorkflowWithStarter {
             val request = WorkflowOuterClass.WorkflowsRequest.getDefaultInstance()
             return workflowServiceBlockingStub
                     .getWorkflows(request)
-                    .workflowList
-                    .map { WorkflowDTO(it.id, it.viewId, it.folder, it.name) }
+                    .workflowsList
+                    .map { WorkflowDTO(it.workflowId, it.folder, it.name) }
         } catch (e: Exception) {
             throw e
         }

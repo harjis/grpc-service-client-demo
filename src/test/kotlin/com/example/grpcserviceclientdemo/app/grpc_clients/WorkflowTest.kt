@@ -24,12 +24,11 @@ class WorkflowTest {
                         override fun getWorkflows(request: WorkflowOuterClass.WorkflowsRequest?, responseObserver: StreamObserver<WorkflowOuterClass.WorkflowsResponse>) {
                             val response = WorkflowOuterClass.WorkflowsResponse
                                     .newBuilder()
-                                    .addAllWorkflow(
+                                    .addAllWorkflows(
                                             mutableListOf(
                                                     WorkflowOuterClass.Workflow
                                                             .newBuilder()
-                                                            .setId(1)
-                                                            .setViewId(1)
+                                                            .setWorkflowId(1)
                                                             .setFolder("Folder 1")
                                                             .setName("Workflow 1")
                                                             .build()
@@ -73,8 +72,7 @@ class WorkflowTest {
         val response = workflow!!.all()
         val firstWorkFlow = response.first()
         Assertions.assertEquals(1, response.size)
-        Assertions.assertEquals(1, firstWorkFlow.id)
-        Assertions.assertEquals(1, firstWorkFlow.viewId)
+        Assertions.assertEquals(1, firstWorkFlow.workflowId)
         Assertions.assertEquals("Folder 1", firstWorkFlow.folder)
         Assertions.assertEquals("Workflow 1", firstWorkFlow.name)
     }
@@ -84,8 +82,7 @@ class WorkflowTest {
         val response = workflow!!.allAsync()
         val firstWorkFlow = response.first()
         Assertions.assertEquals(1, response.size)
-        Assertions.assertEquals(1, firstWorkFlow.id)
-        Assertions.assertEquals(1, firstWorkFlow.viewId)
+        Assertions.assertEquals(1, firstWorkFlow.workflowId)
         Assertions.assertEquals("Folder 1", firstWorkFlow.folder)
         Assertions.assertEquals("Workflow 1", firstWorkFlow.name)
     }

@@ -3,28 +3,41 @@ syntax = "proto3";
 option java_package = "com.example.grpcservicedemo.grpc";
 
 service WorkflowService {
-    rpc getWorkflows (WorkflowsRequest) returns (WorkflowsResponse) {}
-    rpc getWorkflow (WorkflowRequest) returns (WorkflowResponse) {}
-}
-
-message WorkflowsRequest {
-}
-
-message WorkflowsResponse {
-    repeated Workflow workflow = 1;
+    rpc GetWorkflows (WorkflowsRequest) returns (WorkflowsResponse);
+    rpc GetWorkflow (WorkflowRequest) returns (WorkflowResponse);
+    rpc RunWorkflow (RunWorkflowRequest) returns (RunWorkflowResponse);
 }
 
 message Workflow {
-    uint64 id = 1;
-    uint64 viewId = 2;
-    string folder = 3;
-    string name = 4;
+    uint64 workflowId = 1;
+    string folder = 2;
+    string name = 3;
 }
 
+// GetWorkflows -- START
+message WorkflowsRequest {
+
+}
+message WorkflowsResponse {
+    repeated Workflow workflows = 1;
+}
+// GetWorkflows -- END
+
+// GetWorkflow -- START
 message WorkflowRequest {
     int64 id = 1;
 }
-
 message WorkflowResponse {
     Workflow workflow = 1;
 }
+
+// GetWorkflow -- END
+
+// RunWorkflow -- START
+message RunWorkflowRequest {
+    uint64 workflowId = 1;
+}
+message RunWorkflowResponse {
+    uint64 jobId = 1;
+}
+// RunWorkflow -- END

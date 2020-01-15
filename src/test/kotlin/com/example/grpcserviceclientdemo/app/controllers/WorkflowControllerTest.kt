@@ -29,12 +29,11 @@ class WorkflowControllerTest {
                         override fun getWorkflows(request: WorkflowOuterClass.WorkflowsRequest?, responseObserver: StreamObserver<WorkflowOuterClass.WorkflowsResponse>) {
                             val response = WorkflowOuterClass.WorkflowsResponse
                                     .newBuilder()
-                                    .addAllWorkflow(
+                                    .addAllWorkflows(
                                             mutableListOf(
                                                     WorkflowOuterClass.Workflow
                                                             .newBuilder()
-                                                            .setId(1)
-                                                            .setViewId(1)
+                                                            .setWorkflowId(1)
                                                             .setFolder("Folder 1")
                                                             .setName("Workflow 1")
                                                             .build()

@@ -30,12 +30,11 @@ class WorkflowWithStarterTest {
                         override fun getWorkflows(request: WorkflowOuterClass.WorkflowsRequest?, responseObserver: StreamObserver<WorkflowOuterClass.WorkflowsResponse>) {
                             val response = WorkflowOuterClass.WorkflowsResponse
                                     .newBuilder()
-                                    .addAllWorkflow(
+                                    .addAllWorkflows(
                                             mutableListOf(
                                                     WorkflowOuterClass.Workflow
                                                             .newBuilder()
-                                                            .setId(1)
-                                                            .setViewId(1)
+                                                            .setWorkflowId(1)
                                                             .setFolder("Folder 1")
                                                             .setName("Workflow 1")
                                                             .build()
@@ -72,7 +71,6 @@ class WorkflowWithStarterTest {
         val workflow = workflows.first()
         Assertions.assertEquals("Folder 1", workflow.folder)
         Assertions.assertEquals("Workflow 1", workflow.name)
-        Assertions.assertEquals(1, workflow.id)
-        Assertions.assertEquals(1, workflow.viewId)
+        Assertions.assertEquals(1, workflow.workflowId)
     }
 }
